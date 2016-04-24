@@ -26560,7 +26560,7 @@ $packages["go/parser"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, js, ast, parser, token, funcType, sliceType, arrayType, arrayType$1, sliceType$1, main, hoge;
+	var $pkg = {}, $init, bytes, fmt, js, ast, parser, token, funcType, sliceType, arrayType, arrayType$1, sliceType$1, main, GetASTView;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
 	js = $packages["github.com/gopherjs/gopherjs/js"];
@@ -26574,9 +26574,9 @@ $packages["main"] = (function() {
 	sliceType$1 = $sliceType($emptyInterface);
 	main = function() {
 		var $ptr;
-		$global.hoge = $externalize(hoge, funcType);
+		$global.getAST = $externalize(GetASTView, funcType);
 	};
-	hoge = function() {
+	GetASTView = function() {
 		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, buf, err, f, fset, src, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _tuple = $f._tuple; buf = $f.buf; err = $f.err; f = $f.f; fset = $f.fset; src = $f.src; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		src = "\npackage main\nfunc main() {\n\tprintln(\"Hello, World!\")\n}\n";
@@ -26596,8 +26596,9 @@ $packages["main"] = (function() {
 		_r$3 = fmt.Sprintf("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<document>\n\t<descriptiveAlertTemplate>\n\t\t<title>Success</title>\n\t\t<description>%s</description>\n\t</descriptiveAlertTemplate>\n</document>", new sliceType$1([new $String(buf.String())])); /* */ $s = 4; case 4: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 		/* */ $s = 5; case 5:
 		return _r$3;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: hoge }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f.buf = buf; $f.err = err; $f.f = f; $f.fset = fset; $f.src = src; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: GetASTView }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._tuple = _tuple; $f.buf = buf; $f.err = err; $f.f = f; $f.fset = fset; $f.src = src; $f.$s = $s; $f.$r = $r; return $f;
 	};
+	$pkg.GetASTView = GetASTView;
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
