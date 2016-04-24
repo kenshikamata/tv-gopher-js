@@ -36,7 +36,7 @@ App.onLaunch = function(options) {
 
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
-            var alert = createAlert("hoge", "huga");
+            var alert = createAlert();
             navigationDocument.pushDocument(alert);
         } else {
             var alert = createAlert("Evaluate Scripts Error", "There was an error attempting to evaluate the external JavaScript files.\n\n Please check your network connection and try again later.");
@@ -72,8 +72,8 @@ App.onWillTerminate = function() {
 /**
  * This convenience funnction returns an alert template, which can be used to present errors to the user.
  */
-var createAlert = function(title, description) {
-    var alertString = hoge();
+var createAlert = function() {
+    var alertString = getAST();
     var parser = new DOMParser();
     var alertDoc = parser.parseFromString(alertString, "application/xml");
     return alertDoc
