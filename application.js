@@ -73,7 +73,7 @@ App.onWillTerminate = function() {
  * This convenience funnction returns an alert template, which can be used to present errors to the user.
  */
 var createAlert = function() {
-    var alertString = getAST();
+    var alertString = GetASTView();
     var parser = new DOMParser();
     var alertDoc = parser.parseFromString(alertString, "application/xml");
     return alertDoc

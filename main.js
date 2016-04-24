@@ -26574,7 +26574,7 @@ $packages["main"] = (function() {
 	sliceType$1 = $sliceType($emptyInterface);
 	main = function() {
 		var $ptr;
-		$global.getAST = $externalize(GetASTView, funcType);
+		$global.GetASTView = $externalize(GetASTView, funcType);
 	};
 	GetASTView = function() {
 		var $ptr, _r, _r$1, _r$2, _r$3, _tuple, buf, err, f, fset, src, $s, $r;
