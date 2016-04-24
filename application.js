@@ -1,22 +1,14 @@
 //# sourceURL=application.js
 
 /*
-   application.js
-   sampletvml
+Copyright (C) 2016 Apple Inc. All Rights Reserved.
+See LICENSE.txt for this sample’s licensing information
 
-   Copyright (c) 2016年 kamata-ke. All rights reserved.
-   */
+Abstract:
+This is the entry point to the application and handles the initial loading of required JavaScript files.
+*/
 
-/*
- * This file provides an example skeletal stub for the server-side implementation 
- * of a TVML application.
- *
- * A javascript file such as this should be provided at the tvBootURL that is 
- * configured in the AppDelegate of the TVML application. Note that  the various 
- * javascript functions here are referenced by name in the AppDelegate. This skeletal 
- * implementation shows the basic entry points that you will want to handle 
- * application lifecycle events.
- */
+var resourceLoader;
 
 /**
  * @description The onLaunch callback is invoked after the application JavaScript 
@@ -31,14 +23,31 @@
  */
 App.onLaunch = function(options) {
     var javascriptFiles = [
-        `${options.BASEURL}main.js`,
+        `${options.BASEURL}main.js`
     ];
 
+    /**
+     * evaluateScripts is responsible for loading the JavaScript files neccessary
+     * for you app to run. It can be used at any time in your apps lifecycle.
+     * 
+     * @param - Array of JavaScript URLs  
+     * @param - Function called when the scripts have been evaluated. A boolean is
+     * passed that indicates if the scripts were evaluated successfully.
+     */
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
-            var alert = createAlert();
-            navigationDocument.pushDocument(alert);
+            var alertString = GetASTView();
+            var parser = new DOMParser();
+            var alertDoc = parser.parseFromString(alertString, "application/xml");
+            navigationDocument.presentModal(alertDoc);
+
         } else {
+            /*
+            Be sure to handle error cases in your code. You should present a readable, and friendly
+            error message to the user in an alert dialog.
+
+            See alertDialog.xml.js template for details.
+            */
             var alert = createAlert("Evaluate Scripts Error", "There was an error attempting to evaluate the external JavaScript files.\n\n Please check your network connection and try again later.");
             navigationDocument.presentModal(alert);
 
@@ -48,34 +57,22 @@ App.onLaunch = function(options) {
 }
 
 
-App.onWillResignActive = function() {
-
-}
-
-App.onDidEnterBackground = function() {
-
-}
-
-App.onWillEnterForeground = function() {
-
-}
-
-App.onDidBecomeActive = function() {
-
-}
-
-App.onWillTerminate = function() {
-
-}
-
-
 /**
  * This convenience funnction returns an alert template, which can be used to present errors to the user.
  */
-var createAlert = function() {
-    var alertString = GetASTView();
+var createAlert = function(title, description) {
+
+    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
+        <document>
+          <alertTemplate>
+            <title>${title}</title>
+            <description>${description}</description>
+          </alertTemplate>
+        </document>`
+
     var parser = new DOMParser();
+
     var alertDoc = parser.parseFromString(alertString, "application/xml");
+
     return alertDoc
 }
-
