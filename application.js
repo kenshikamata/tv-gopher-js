@@ -22,8 +22,16 @@ var resourceLoader;
  * the URL that was used to retrieve the application JavaScript.
  */
 App.onLaunch = function(options) {
+    var urlParts = options["location"].split('/');
+    var host = "";
+    for (var i  = 2; i < urlParts.length - 1; ++i ) {
+        if(urlParts[i] !== "" ) {
+            host += urlParts[i] + "/";
+        }
+    }
+
     var javascriptFiles = [
-        `${options.BASEURL}main.js`
+        "http://" + host + "main.js"
     ];
 
     /**
